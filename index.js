@@ -48,7 +48,6 @@ app.post("/customer-registration", (req, res) => {
     if(!req.body.fullName)
     {
         errors.errorName = ["You must enter your name"]
-
     }
 
     if(!req.body.email)
@@ -58,15 +57,17 @@ app.post("/customer-registration", (req, res) => {
 
     if(!req.body.psw)
     {
-        errors.errorPws = ["You must enter your password"];
+        errors.errorPws = ["You must enter password"];
     }
 
     if(!req.body.pswrepeat)
     {
         errors.errorRe = ["You must enter your password again"];
     }
-    if(req.body.psw.length < 9 || req.body.psw.length > 12){
-        errors.errorLen = ["You must enter password length bewteen 9 to 12"];
+
+    const password =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if(!req.body.psw.match(password)){
+        errors.errorVal = ["You must enter your password between 7 to 15 and contain at least one numberic digit and special character"]
     }
    
     //If theres any errors in the error object, reject the registration and display validation
@@ -74,16 +75,7 @@ app.post("/customer-registration", (req, res) => {
         res.render("customer-registration", errors);
         
     } 
-
-
-
-    // //If the user enters all the data and submit the form
-    // const { fullName } = req.body;
-    // res.render("customer-registration",{
-    //     successMessage :`Thank you ${fullName}
-    //     we received your information and will contact you shortly`
-    // });
-
+    //email
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
