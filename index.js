@@ -2,6 +2,7 @@ const express = require("express"); //this imports the express package that was 
 const app = express();
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
+const nodemailer = require('nodemailer');
 
 const CategoryModel = require("./model/category")
 const bestSellarModel = require("./model/bestSellar")
@@ -40,31 +41,27 @@ app.get("/customer-registration", (req, res) => {
 });
 
 app.post("/customer-registration", (req, res) => {
-    const errorMessagesFullName = [];
-    const errorMessagesEmail = [];
-    const errorMessagesPassword = [];
-    const errorMessagesRe = [];
-    const errorValLen = [];
+  
     const errors = {};
 
     //validation
     if(!req.body.fullName)
     {
         errors.errorName = ["You must enter your name"]
-       // errorMessagesFullName.push("You must enter your name");
+
     }
 
-    if(req.body.email=="")
+    if(!req.body.email)
     {
         errors.errorEmail = ["You must enter your email"];
     }
 
-    if(req.body.psw=="")
+    if(!req.body.psw)
     {
         errors.errorPws = ["You must enter your password"];
     }
 
-    if(req.body.pswrepeat=="")
+    if(!req.body.pswrepeat)
     {
         errors.errorRe = ["You must enter your password again"];
     }
@@ -79,11 +76,6 @@ app.post("/customer-registration", (req, res) => {
     } 
 
 
-    //record the customer information
-
-
-    //send email
-
 
     // //If the user enters all the data and submit the form
     // const { fullName } = req.body;
@@ -91,6 +83,30 @@ app.post("/customer-registration", (req, res) => {
     //     successMessage :`Thank you ${fullName}
     //     we received your information and will contact you shortly`
     // });
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'rocking1782@gmail.com',
+          pass: '@1Kms27272'
+        }
+      });
+      
+      const mailOptions = {
+        from: 'rocking1782@gmail.com',
+        to: req.body.email,
+        subject: 'Welcome to MS PowerLifting',
+        text: `Dear. ${req.body.fullName}. 
+        Welcome to MS PowerLifting Store!`
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
 
 });
 
@@ -120,3 +136,56 @@ const PORT= process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Web Server Started`);
 });
+
+
+
+// email
+
+
+// // priactice 
+// const errorMessagesFullName = [];
+// const errorMessagesEmail = [];
+// const errorMessagesPassword = [];
+// const errorMessagesRe = [];
+// const errorMessageLength = [];
+
+// //validation
+// if(req.body.fullName=="")
+// {
+//     errorMessagesFullName.push("You must enter your name");
+// }
+
+// if(req.body.email=="")
+// {
+//     errorMessagesEmail.push("You must enter your email");
+// }
+
+// if(req.body.psw=="")
+// {
+//     errorMessagesPassword.push("You must enter your password");
+// }
+
+// if(req.body.pswrepeat=="")
+// {
+//     errorMessagesRe.push("You must enter your password again");
+// }
+
+// if(req.body.psw.length < 9 || req.body.psw.length > 12){
+//     errorMessageLength.push("Length of password should be between 9 to 12");
+// }
+
+// //If the user does not enter all the information
+// if(errorMessagesFullName.length > 0 || 
+//    errorMessagesEmail.length > 0 || 
+//    errorMessagesPassword.length > 0 || 
+//    errorMessagesRe.length > 0||
+//    errorMessageLength >0)
+// {
+//         res.render("customer-registration",{
+//                 error0 : errorMessagesFullName,
+//                 error1 :errorMessagesEmail,
+//                 error2 : errorMessagesPassword,
+//                 error3 : errorMessagesRe,
+//                 error4 : errorMessageLength
+//         });
+// }

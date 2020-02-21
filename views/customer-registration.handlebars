@@ -11,47 +11,63 @@
             <div class="cust-box">
                 <h style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create account</h>
                 <hr>
-
+                {{!-- Name --}}
                 <label for="fullName"><b>Name</b></label>
                 <input type="text" placeholder="Enter Name" id="fullName" name="fullName"> <br>
 
                 {{#each errorName}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
                 {{/each}}
-
+                
+                {{!-- Email --}}
                 <label for="email"> <b>Email</b></label>
                 <input type="text" placeholder="Enter Email" name="email">
 
                 {{#each errorEmail}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
                 {{/each}}
 
+                {{!-- Password --}}
                 <label for="psw"> <b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw">
 
                 {{#each errorPws}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
                 {{/each}}
 
                 
-
-                {{#each errorRe}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
-                {{/each}}
-
                 {{#each errorLen}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
                 {{/each}}
-
+                
+                {{!-- Password Again --}}
                 <label for="pswrepeat"> <b>Password again</b></label>
                 <input type="password" placeholder="Repeat Password" name="pswrepeat">
                 
                 {{#each errorRe}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
                 {{/each}}
 
                 {{#each errorLen}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
                 {{/each}}
                 
 
