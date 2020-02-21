@@ -41,10 +41,60 @@ app.get("/customer-registration", (req, res) => {
 
 app.post("/customer-registration", (req, res) => {
 
-   
-        res.render("customer-registration", {
-            title: "customer-registration"
-        });
+    const errorMessagesFullName = [];
+    const errorMessagesEmail = [];
+    const errorMessagesPassword = [];
+    const errorMessagesRe = [];
+
+    //validation
+    if(req.body.fullName=="")
+    {
+        errorMessagesFullName.push("You must enter your name");
+    }
+
+    if(req.body.email=="")
+    {
+        errorMessagesEmail.push("You must enter your email");
+    }
+
+    if(req.body.psw=="")
+    {
+        errorMessagesPassword.push("You must enter your password");
+    }
+
+    if(req.body.pswrepeat=="")
+    {
+        errorMessagesRe.push("You must enter your password again");
+    }
+
+
+    //If the user does not enter all the information
+    if(errorMessagesFullName.length > 0 || 
+       errorMessagesEmail.length > 0 || 
+       errorMessagesPassword.length > 0 || 
+       errorMessagesRe.length > 0)
+    {
+            res.render("customer-registration",{
+                    error0 : errorMessagesFullName,
+                    error1 :errorMessagesEmail,
+                    error2 : errorMessagesPassword,
+                    error3 : errorMessagesRe
+            });
+    }
+
+
+    //If the user enters all the data and submit the form
+    else
+    {
+            //descturing
+            const {fullName} =req.body;
+            res.render("customer-registration",{
+                    successMessage :`Thank you ${fullName}
+                    we received your information and will contact you shortly`
+            });
+
+    }
+       
     
 
 });
@@ -69,7 +119,7 @@ app.post("/login", (req, res) => {
 
 });
 
-const PORT= process.env.PORT || 3000;
+const PORT= process.env.PORT ||3000;
 app.listen(PORT, () => {
     console.log(`Web Server Started`);
 });

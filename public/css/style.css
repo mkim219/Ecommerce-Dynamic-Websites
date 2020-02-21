@@ -343,3 +343,9 @@ button:hover {
   padding: 16px;
 }
 
+.valid {
+  font-family: 'Acme', sans-serif;
+  font-size: 5px;
+  text-align: center;
+}
+
