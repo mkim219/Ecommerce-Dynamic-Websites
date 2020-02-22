@@ -75,7 +75,7 @@
 }
 
 .column.middle {
-  flex-grow: 4;
+  width: 50%;
 }
 
 .row:after {
@@ -342,7 +342,14 @@ opacity: 0.8;
 .enterBox {
 padding: 16px;
 }
-
+/* validation font control */
+.valid{
+  font-size: 10px;
+  font-weight: bolder;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 
 /* Welcome */

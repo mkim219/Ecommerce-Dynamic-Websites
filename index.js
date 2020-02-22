@@ -11,7 +11,7 @@ app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
-app.use(express.static("public/img")); 
+app.use(express.static("public/img"));
 //makse express to make form data avaiable via req.body in ever
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 app.get("/products", (req, res) => {
     const type = req.query.type;
     res.render("products", {
-        BestSeller: type ? bestSellarModel.getFilteredBestSellar(type): bestSellarModel.getAllBestSeller()
+        BestSeller: type ? bestSellarModel.getFilteredBestSellar(type) : bestSellarModel.getAllBestSeller()
     });
 
 });
@@ -35,86 +35,81 @@ app.get("/products", (req, res) => {
 app.get("/customer-registration", (req, res) => {
     res.render("customer-registration", {
     });
-   
+
 });
 
 app.post("/customer-registration", (req, res) => {
-  
+
     const errors = {};
 
     //validation
-    if(!req.body.fullName)
-    {
+    if (!req.body.fullName) {
         errors.errorName = ["You must enter your name"]
     }
 
-    if(!req.body.email)
-    {
+    if (!req.body.email) {
         errors.errorEmail = ["You must enter your email"];
     }
 
-    if(!req.body.psw)
-    {
+    if (!req.body.psw) {
         errors.errorPws = ["You must enter password"];
     }
 
-    if(!req.body.pswrepeat)
-    {
+    if (!req.body.pswrepeat) {
         errors.errorRe = ["You must enter your password again"];
     }
 
-    const password =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-    if(!req.body.psw.match(password)){
+    const password = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if (!req.body.psw.match(password)) {
         errors.errorVal = ["You must enter your password between 7 to 15 and contain at least one numberic digit and special character"]
     }
-   
-    if(!req.body.psw.match(req.body.pswrepeat)){
-    
+
+    if (!req.body.psw.match(req.body.pswrepeat)) {
+
         errors.errormatch = ["Password is not matching"];
     }
-   
+
     //If theres any errors in the error object, reject the registration and display validation
     if (Object.keys(errors).length) {
         res.render("customer-registration", errors);
-        
-    } 
+
+    }
 
     //email
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'rocking1782@gmail.com',
-          pass: '@1Kms27272'
+            user: 'rocking1782@gmail.com',
+            pass: '@1Kms27272'
         }
-      });
-      
-      const mailOptions = {
+    });
+
+    const mailOptions = {
         from: 'rocking1782@gmail.com',
         to: req.body.email,
         subject: 'Welcome to MS PowerLifting',
         text: `Dear. ${req.body.fullName}. 
         Welcome to MS PowerLifting Store!`
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
+    };
 
-      if(req.body.psw.match(req.body.pswrepeat) && req.body.fullName && req.body.email){
-        res.redirect('/welcome'); 
-   }
-   next();
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+
+    if (req.body.psw.match(req.body.pswrepeat) && req.body.psw.match(req.body.pswrepeat) && req.body.email) {
+        res.redirect('/welcome');
+    }else{
+        return false;
+    }
 });
 
 app.get("/welcome", (req, res) => {
 
     res.render("welcome", {
-       name: req.body.fullName
-       
 
     });
 
@@ -142,7 +137,7 @@ app.post("/login", (req, res) => {
 
 
 
-const PORT= process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Web Server Started`);
 });
