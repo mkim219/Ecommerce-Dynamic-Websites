@@ -1,6 +1,3 @@
-{{#each error4}}
-<div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>{{this}}</div>
-{{/each}}
 
 <div class="flexbox" style="display:flex;">
     <div class="colside"></div>
@@ -9,7 +6,7 @@
         {{!-- <div>{{successMessage}}</div> --}}
         <form name="register" method="POST" action="/customer-registration">
             <div class="cust-box">
-                <h style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create account</h>
+                <h style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</h>
                 <hr>
                 {{!-- Name --}}
                 <label for="fullName"><b>Name</b></label>
@@ -56,14 +53,7 @@
                 <label for="pswrepeat"> <b>Password again</b></label>
                 <input type="password" placeholder="Repeat Password" name="pswrepeat">
                 
-                {{#each errorRe}}
-                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
-                &nbsp
-                {{this}}
-                </div>
-                {{/each}}
-
-                {{#each errorLen}}
+                {{#each errormatch}}
                 <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
                 &nbsp
                 {{this}}
@@ -75,7 +65,7 @@
                 <p style="text-align: center; font-size:15px;">By creating an account you agree to our <a
                         href="https://policies.google.com/">Terms & Privacy</a>.</p>
 
-                <button type="submit" class="registerbtn">Register</button>
+                <button type="submit" class="registerbtn" >Register</button>
             </div>
 
             <div class="container signin">
@@ -87,6 +77,3 @@
     <div class="colside"></div>
 </div>
 
-<script>
-
-</script>

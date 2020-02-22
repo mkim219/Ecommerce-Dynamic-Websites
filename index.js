@@ -34,10 +34,8 @@ app.get("/products", (req, res) => {
 
 app.get("/customer-registration", (req, res) => {
     res.render("customer-registration", {
-        title: "customer-registration",
-    
     });
-
+   
 });
 
 app.post("/customer-registration", (req, res) => {
@@ -70,11 +68,17 @@ app.post("/customer-registration", (req, res) => {
         errors.errorVal = ["You must enter your password between 7 to 15 and contain at least one numberic digit and special character"]
     }
    
+    if(!req.body.psw.match(req.body.pswrepeat)){
+    
+        errors.errormatch = ["Password is not matching"];
+    }
+   
     //If theres any errors in the error object, reject the registration and display validation
     if (Object.keys(errors).length) {
         res.render("customer-registration", errors);
         
     } 
+
     //email
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -100,9 +104,21 @@ app.post("/customer-registration", (req, res) => {
         }
       });
 
+      if(req.body.psw.match(req.body.pswrepeat) && req.body.fullName && req.body.email){
+        res.redirect('/welcome'); 
+   }
+   next();
 });
 
+app.get("/welcome", (req, res) => {
 
+    res.render("welcome", {
+       name: req.body.fullName
+       
+
+    });
+
+});
 
 app.get("/login", (req, res) => {
 
@@ -124,6 +140,8 @@ app.post("/login", (req, res) => {
 
 });
 
+
+
 const PORT= process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Web Server Started`);
@@ -131,7 +149,7 @@ app.listen(PORT, () => {
 
 
 
-// email
+
 
 
 // // priactice 
