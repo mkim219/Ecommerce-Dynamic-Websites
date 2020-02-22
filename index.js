@@ -61,7 +61,7 @@ app.post("/customer-registration", (req, res) => {
 
     const password = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
     if (!req.body.psw.match(password)) {
-        errors.errorVal = ["You must enter your password between 7 to 15 and contain at least one numberic digit and special character"]
+        errors.errorVal = ["You must enter password between 7 to 15 & contain at least one numberic digit & special character"]
     }
 
     if (!req.body.psw.match(req.body.pswrepeat)) {

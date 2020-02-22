@@ -75,8 +75,10 @@
 }
 
 .column.middle {
-  width: 50%;
+  width: 90%;
 }
+
+
 
 .row:after {
   content: "";
@@ -246,6 +248,10 @@ font-size: 40px;
 padding: 16px;
 }
 
+.columnRegister{
+  width: 50%;
+}
+
 input[type=text]:focus, input[type=password]:focus {
 background-color: #ddd;
 outline: none;
@@ -282,7 +288,7 @@ width: 100%;
 }
 
 .colside{
-width: 50%;
+width: 60%;
 }
 
 /* login */
@@ -347,8 +353,7 @@ padding: 16px;
   font-size: 10px;
   font-weight: bolder;
   margin-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+
 }
 
 
