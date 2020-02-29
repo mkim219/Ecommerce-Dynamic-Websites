@@ -74,10 +74,13 @@
   width: 40%
 }
 
-.column.middle {
+.columnMiddleIndex {
   width: 90%;
+  text-align: center;
 }
-
+.columnBest{
+  margin-top: 400px;
+}
 
 
 .row:after {

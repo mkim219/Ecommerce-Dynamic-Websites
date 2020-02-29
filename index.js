@@ -2,139 +2,32 @@ const express = require("express"); //this imports the express package that was 
 const app = express();
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
-const nodemailer = require('nodemailer');
+//load the environment variable file 
+require('dotenv').config({path:"./config/keys.env"});
 
-const CategoryModel = require("./model/category")
-const bestSellarModel = require("./model/bestSellar")
 
+
+//handlebars middleware (this tells Express to set handlebars as the template engine )
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
 app.use(express.static("public/img"));
+
 //makse express to make form data avaiable via req.body in ever
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get("/", (req, res) => {
+// load controllers
+const generalConstroller = require("./controllers/general");
+const customerConstroller = require("./controllers/customer-manage");
+const productConstroller = require("./controllers/product");
 
-    res.render("index", {
-        category: CategoryModel.getAllCategory(),
-        BestSeller: bestSellarModel.getAllBestSeller()
-    });
+//map each controller to the app object
+app.use("/",generalConstroller);
 
-});
-//Route for the Products page 
-app.get("/products", (req, res) => {
-    const type = req.query.type;
-    res.render("products", {
-        BestSeller: type ? bestSellarModel.getFilteredBestSellar(type) : bestSellarModel.getAllBestSeller()
-    });
+app.use("/",productConstroller);
 
-});
-
-app.get("/customer-registration", (req, res) => {
-    res.render("customer-registration", {
-    });
-
-});
-
-app.post("/customer-registration", (req, res) => {
-
-    const errors = {};
-
-    //validation
-    if (!req.body.fullName) {
-        errors.errorName = ["You must enter your name"]
-    }
-
-    if (!req.body.email) {
-        errors.errorEmail = ["You must enter your email"];
-    }
-
-    if (!req.body.psw) {
-        errors.errorPws = ["You must enter password"];
-    }
-
-    if (!req.body.pswrepeat) {
-        errors.errorRe = ["You must enter your password again"];
-    }
-
-    const password = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-    if (!req.body.psw.match(password)) {
-        errors.errorVal = ["You must enter password between 7 to 15 & contain at least one numberic digit & special character"]
-    }
-
-    if (!req.body.psw.match(req.body.pswrepeat)) {
-
-        errors.errormatch = ["Password is not matching"];
-    }
-
-    //If theres any errors in the error object, reject the registration and display validation
-    if (Object.keys(errors).length) {
-        res.render("customer-registration", errors);
-
-    }
-
-    //email
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'rocking1782@gmail.com',
-            pass: '@1Kms27272'
-        }
-    });
-
-    const mailOptions = {
-        from: 'rocking1782@gmail.com',
-        to: req.body.email,
-        subject: 'Welcome to MS PowerLifting',
-        text: `Dear. ${req.body.fullName}. 
-        Welcome to MS PowerLifting Store!`
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
-
-    if (req.body.psw.match(req.body.pswrepeat) && req.body.psw.match(req.body.pswrepeat) && req.body.email) {
-        res.redirect('/welcome');
-    }else{
-        return false;
-    }
-});
-
-app.get("/welcome", (req, res) => {
-
-    res.render("welcome", {
-
-    });
-
-});
-
-app.get("/login", (req, res) => {
-
-    res.render("login", {
-        title: "login",
-        headingInfo: "login"
-
-    });
-
-});
-
-app.post("/login", (req, res) => {
-
-    res.render("login", {
-        title: "login",
-        headingInfo: "login"
-
-    });
-
-});
-
+app.use("/",customerConstroller);
 
 
 const PORT = process.env.PORT || 3000;
