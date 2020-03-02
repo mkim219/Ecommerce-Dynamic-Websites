@@ -33,18 +33,10 @@ router.post("/customer-registration", (req, res) => {
         errors.errorVal = ["You must enter password between 7 to 15 & contain at least one numberic digit & special character"]
     }
 
-    if (!req.body.psw.match(req.body.pswrepeat)) {
-
-        errors.errormatch = ["Password is not matching"];
-    }
-
-    //If theres any errors in the error object, reject the registration and display validation
-    if (Object.keys(errors).length) {
-        res.render("customer-registration", errors);
-
-    }
+    
 
     //email
+if (req.body.psw.match(req.body.pswrepeat)){
     const {fullName,email} = req.body
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
@@ -64,12 +56,26 @@ router.post("/customer-registration", (req, res) => {
     .catch(err=>{
         console.log(`Error ${err}`);
     });
+}else{
+    errors.errormatch = ["Password is not matching"];
+    return false;
+}
 
     // if (req.body.psw.match(req.body.pswrepeat) && req.body.psw.match(req.body.pswrepeat) && req.body.email && !req.body.pswrepeat) {
     //     res.redirect('/welcome');
     // }else{
     //     return false;
     // }
+
+    // if (!req.body.psw.match(req.body.pswrepeat)) {
+
+    //     errors.errormatch = ["Password is not matching"];
+    // }
+
+    //If theres any errors in the error object, reject the registration and display validation
+    if (Object.keys(errors).length) {
+        res.render("customer-registration", errors);
+    }
 });
 
 router.get("/welcome", (req, res) => {
