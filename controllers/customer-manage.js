@@ -87,21 +87,25 @@ router.get("/welcome", (req, res) => {
 router.get("/login", (req, res) => {
 
     res.render("login", {
-        title: "login",
-        headingInfo: "login"
-
     });
 
 });
 
 router.post("/login", (req, res) => {
 
-    res.render("login", {
-        title: "login",
-        headingInfo: "login"
+    const errorsLog = {};
 
-    });
+    //validation
+    if (!req.body.email) {
+        errorsLog.errorE = ["You must enter your Email"]
+    }
 
+    if (!req.body.password) {
+        errorsLog.errorPassword = ["You must enter your password"];
+    }
+    if (Object.keys(errorsLog).length) {
+        res.render("login", errorsLog);
+    }
 });
 
 module.exports = router;

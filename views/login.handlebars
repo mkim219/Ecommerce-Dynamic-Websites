@@ -9,10 +9,22 @@
 
             <div class="enterBox">
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter email" name="email" required>
+                <input type="text" placeholder="Enter email" name="email">
+                {{#each errorE}}
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
+                {{/each}}
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw">
+                {{#each errorPassword}}
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
+                {{/each}}
 
                 <button type="submit">Login</button>
                 <label>
