@@ -81,7 +81,7 @@ router.post("/customer-registration", (req, res) => {
         res.render("customer-registration",{
             errorName: errors.errorName,
             errorEmail: errors.errorEmail,
-            errorPws: errors.errorName,
+            errorPws: errors.errorPws,
             errorVal: errors.errorVal,
             errormatch:errors.errormatch,
             errorRe:errors.errorRe,
