@@ -80,7 +80,7 @@ router.post("/customer-registration", (req, res) => {
     if (Object.keys(errors).length) {
         res.render("customer-registration",{
             errorName: errors.errorName,
-            errorEmail: errors.errorName,
+            errorEmail: errors.errorEmail,
             errorPws: errors.errorName,
             errorVal: errors.errorVal,
             errormatch:errors.errormatch,
