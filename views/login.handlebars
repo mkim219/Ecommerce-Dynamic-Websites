@@ -2,14 +2,14 @@
 <div class="flexbox" style="display:flex;">
     <div class="colside"></div>
     <div>
-        <form method="POST" action="/login">
+        <form method="POST" action="/login" >
             <div class="image">
                 <img src="hero.png" alt="logo" width="500">
             </div>
 
             <div class="enterBox">
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter email" name="email">
+                <input type="text" placeholder="Enter email" name="email" value="{{l_email}}" >
                 {{#each errorE}}
                 <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
                 &nbsp
@@ -49,3 +49,4 @@
 
     <div class="colside"></div>
 </div>
+

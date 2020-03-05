@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/customer-registration", (req, res) => {
+    
     res.render("customer-registration", {
+      
     });
 
 });
@@ -71,8 +73,22 @@ router.post("/customer-registration", (req, res) => {
 
     //     errors.errormatch = ["Password is not matching"];
     // }
+    // if (Object.keys(errors).length) {
+    //     res.render("customer-registration", errors);
+    // }
+
     if (Object.keys(errors).length) {
-        res.render("customer-registration", errors);
+        res.render("customer-registration",{
+            errorName: errors.errorName,
+            errorEmail: errors.errorName,
+            errorPws: errors.errorName,
+            errorVal: errors.errorVal,
+            errormatch:errors.errormatch,
+            errorRe:errors.errorRe,
+
+            r_name: req.body.fullName,
+            r_email: req.body.email
+        });
     }
 });
 
@@ -87,6 +103,7 @@ router.get("/welcome", (req, res) => {
 router.get("/login", (req, res) => {
 
     res.render("login", {
+      
     });
 
 });
@@ -97,14 +114,20 @@ router.post("/login", (req, res) => {
 
     //validation
     if (!req.body.email) {
-        errorsLog.errorE = ["You must enter your Email"]
+        errorsLog.errorEmail = ["You must enter your Email"]
     }
 
     if (!req.body.password) {
         errorsLog.errorPassword = ["You must enter your password"];
     }
+
     if (Object.keys(errorsLog).length) {
-        res.render("login", errorsLog);
+        res.render("login", {
+            errorE: errorsLog.errorEmail,
+            errorPassword: errorsLog.errorPassword,
+
+            l_email: req.body.email
+        });
     }
 });
 

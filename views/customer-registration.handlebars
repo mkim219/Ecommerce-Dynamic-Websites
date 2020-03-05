@@ -10,7 +10,7 @@
                 <hr>
                 {{!-- Name --}}
                 <label for="fullName"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" id="fullName" name="fullName"> <br>
+                <input type="text" placeholder="Enter Name" id="fullName" name="fullName" value="{{r_name}}"> <br>
 
                 {{#each errorName}}
                 <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
@@ -21,7 +21,7 @@
                 
                 {{!-- Email --}}
                 <label for="email"> <b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email">
+                <input type="text" placeholder="Enter Email" name="email" value="{{r_email}}">
 
                 {{#each errorEmail}}
                 <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
