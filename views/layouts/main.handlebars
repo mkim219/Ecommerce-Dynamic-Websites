@@ -8,14 +8,15 @@
     <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Caveat|Pacifico|Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Pacifico|Shadows+Into+Light&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <title>{{title}}</title>
 </head>
 
 <body>
 
- <header class = "frontdoor">
+    <header class="frontdoor">
         <h1>
             <a class="Logo" href="/">
                 <hr width="60%">
@@ -26,15 +27,23 @@
     </header>
     <div class="head"></div>
 
-   
+
 
     <div class="topnav">
         <nav>
             <a class="navfont" href="/"><i class="fas fa-home"></i> Home</a></li>
             <a class="navfont" href="/products"><i class="fas fa-shopping-basket"></i> Products</a></li>
-            <a class="navfont" href="/customer-registration"><i class="fas fa-registered"></i> Customer Registration</a></li>
+            {{#if user}}
+            <a class="navfont" href="/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            {{else}}
+            <a class="navfont" href="/customer-registration"><i class="fas fa-registered"></i> Customer Registration</a>
+            </li>
             <a class="navfont" href="/login"> <i class="fas fa-sign-in-alt"></i> Login</a></li>
-        </nav>
+            {{/if}}
+          
+
+
+        </nav> 
     </div>
 
     <div class="row">
@@ -42,18 +51,21 @@
     </div>
     <footer>
         <div style="display: inline-block; text-align: center;">
-        <ul class="nav">
+            <ul class="nav">
 
-            <li class="nav-item"><a class="nav-link" href="tel:1-519-781-9106"><i class="fa fa-phone"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="mailto:mkim219@mysenenca.ca"><i class="fa fa-envelope-o"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/minsu-kim-37a553156" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="https://github.com/mkim219" target="_blank"><i class="fab fa-github"></i></a></li>
-        </ul>
+                <li class="nav-item"><a class="nav-link" href="tel:1-519-781-9106"><i class="fa fa-phone"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="mailto:mkim219@mysenenca.ca"><i
+                            class="fa fa-envelope-o"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/minsu-kim-37a553156"
+                        target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/mkim219" target="_blank"><i
+                            class="fab fa-github"></i></a></li>
+            </ul>
         </div>
-    
+
     </footer>
 
-    
+
     <script src="https://kit.fontawesome.com/c92f2e0cce.js" crossorigin="anonymous"></script>
 </body>
 

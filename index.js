@@ -2,10 +2,12 @@ const express = require("express"); //this imports the express package that was 
 const app = express();
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
+const mongoose = require('mongoose');
+const session = require('express-session');
+
+
 //load the environment variable file 
 require('dotenv').config({path:"./config/keys.env"});
-
-
 
 //handlebars middleware (this tells Express to set handlebars as the template engine )
 app.engine("handlebars", exphbs());
@@ -22,6 +24,35 @@ const generalConstroller = require("./controllers/general");
 const customerConstroller = require("./controllers/customer-manage");
 const productConstroller = require("./controllers/product");
 
+// this is to allow specific forms and/or links that were submitteed /pressed to send PUT and DELETE request resepectivly 
+// app.use((req,res,next)=>{
+//     if(req.query.method == "PUT")
+//     {
+//         req.method = "PUT";
+//     }
+//     else if(req.query.method == "DELETE")
+//     {
+//         req.method = "DELETE";
+//     }
+//     next(); // next() make sure call next middleware down below 
+// });
+
+app.use(session({secret: `${process.env.SESSION_SECRET}`, 
+                resave: false,
+                saveUninitialized: true}));
+
+//custom middleware functions
+app.use((req,res,next)=>{   
+
+    //res.locals.user is a global handlebars variable. This means that ever single handlebars file can access 
+    //that user variable
+    res.locals.user = req.session.user;
+    next();
+    //this allow to use using {{user.firstName}}
+});
+
+
+
 //map each controller to the app object
 app.use("/",generalConstroller);
 
@@ -34,7 +65,11 @@ app.listen(PORT, () => {
     console.log(`Web Server Started`);
 });
 
-
+mongoose.connect(process.env.MONGODB_DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>{
+    console.log(`connected to MongoDB Database `)
+})
+.catch(err=>console.log(`Error occured when connecting to database ${err}`));
 
 
 

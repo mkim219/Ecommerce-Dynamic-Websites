@@ -3,7 +3,6 @@
     <div class="colside"></div>
 
     <div class="columnRegister">
-        {{!-- <div>{{successMessage}}</div> --}}
         <form name="register" method="POST" action="/customer-registration">
             <div class="cust-box">
                 <h style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</h>
@@ -24,6 +23,13 @@
                 <input type="text" placeholder="Enter Email" name="email" value="{{r_email}}">
 
                 {{#each errorEmail}}
+                <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
+                &nbsp
+                {{this}}
+                </div>
+                {{/each}}
+
+                {{#each errorduplicate}}
                 <div class="valid"><i class="fas fa-exclamation" style="font-size:10px; color:red;"></i>
                 &nbsp
                 {{this}}
