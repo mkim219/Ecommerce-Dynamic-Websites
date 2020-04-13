@@ -1,7 +1,7 @@
 
     <div class="vertical-menu column side products">
 
-        <a class="font" href="/sleeves"><i class="fas fa-bullseye"></i> Sleeves</a>
+         <a class="font" href="/sleeves"><i class="fas fa-bullseye"></i> Sleeves</a>
         <a class="font" href="/belt"><i class="fas fa-bullseye"></i> Belt</a>
         <a class="font" href="/shoes"><i class="fas fa-bullseye"></i> Lifting Shoes</a>
         <a class="font" href="/wrist"><i class="fas fa-bullseye"></i> Wrist Wrap</a>
@@ -9,20 +9,17 @@
 
 <div class="column middle products">
 <section >
-
-    {{#each data}}
+    {{#each belt}}
     <div class="row-1" >
         <div class="column-1">  
-            <div class="card {{this.class}}">
+            <div class="card {{this.class}}" id = {{this.id}}>
                 <img src= "/uploads/{{this.pic}}" alt="Best_Sellar" style="width:80%">
                 <div class="container">
                     <h4><b>{{this.pname}}</b></h4>
                     <p>{{this.pprice}}</p>
                     <p>{{this.type}}</p>
                     <p>{{this.pquan}}</p>
-                    
                     <a href="/product_detail/{{this.id}}" class="_button">detail</a>
-                
                 </div>
             </div>
         </div>

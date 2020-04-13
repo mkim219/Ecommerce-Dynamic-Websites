@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Caveat|Pacifico|Shadows+Into+Light&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Pacifico|Shadows+Into+Light&display=swap"rel="stylesheet">
+    
     <link rel="stylesheet" href="/css/style.css">
-    <title>{{title}}</title>
+    <title>{{title}}</title>    
 </head>
 
 <body>
@@ -31,19 +31,26 @@
 
     <div class="topnav">
         <nav>
+            {{!-- customer --}}
+            {{#if (eq user.type 'user') }}
             <a class="navfont" href="/"><i class="fas fa-home"></i> Home</a></li>
             <a class="navfont" href="/products"><i class="fas fa-shopping-basket"></i> Products</a></li>
-            {{#if user}}
             <a class="navfont" href="/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <a class="navfont" href="/"> <i class="fas fa-shopping-cart"></i> Cart</a></li>
+            {{!-- admin --}}
+            {{else if (eq user.type 'admin')}}
+            <a class="navfont" href="/"><i class="fas fa-home"></i> Home</a></li>
+            <a class="navfont" href="/products"><i class="fas fa-shopping-basket"></i> Products</a></li>
+            <a class="navfont" href="/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <a class="navfont" href="/admin"> <i class="fas fa-user-shield"></i> Administrator</a></li>
             {{else}}
+            {{!-- non-register user --}}
+            <a class="navfont" href="/"><i class="fas fa-home"></i> Home</a></li>
+            <a class="navfont" href="/products"><i class="fas fa-shopping-basket"></i> Products</a></li>
             <a class="navfont" href="/customer-registration"><i class="fas fa-registered"></i> Customer Registration</a>
-            </li>
             <a class="navfont" href="/login"> <i class="fas fa-sign-in-alt"></i> Login</a></li>
             {{/if}}
-          
-
-
-        </nav> 
+        </nav>
     </div>
 
     <div class="row">
@@ -64,9 +71,8 @@
         </div>
 
     </footer>
-
-
     <script src="https://kit.fontawesome.com/c92f2e0cce.js" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

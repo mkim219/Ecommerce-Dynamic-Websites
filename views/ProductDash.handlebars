@@ -1,0 +1,29 @@
+<div class="vertical-menu column side products">
+    <a class="font" href="/products?type=sleeves"><i class="fas fa-bullseye"></i> All Products</a>
+    <a class="font" href="/productadd"><i class="fas fa-bullseye"></i> Add Product</a>
+    <a class="font" href="/productDash"><i class="fas fa-bullseye"></i> Edit &amp; Delete Product</a>
+</div>
+
+
+
+<div class="column middle products">
+<section >
+    {{#each data}}
+    <div class="row-1" >
+        <div class="column-1">  
+            <div class="card    {{this.class}}" id = {{this.id}}>
+                <img src= "/uploads/{{this.pic}}" alt="Best_Sellar" style="width:80%">
+                <div class="container">
+                    <h4><b>{{this.pname}}</b></h4>
+                    <p>{{this.pprice}}</p>
+                    <p>{{this.type}}</p>
+                    <p>{{this.pquan}}</p>
+                  
+                    <a href="/productEdit/{{this.id}}" class="edit-delete-button">Edit</a>
+                    <a href="/productDash/{{this.id}}?method=DELETE" class="edit-delete-button">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+

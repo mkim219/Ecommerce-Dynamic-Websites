@@ -208,6 +208,7 @@ background: grey;
 .vertical-menu {
 background-color: #333;
 width: 40%;
+height: 100%
 }
 
 .vertical-menu a {
@@ -231,6 +232,7 @@ color: white;
 
 .column.side.products{
 width:15%;
+
 }
 
 .column.middle.products{
@@ -543,3 +545,102 @@ h3{
   -ms-flex: 50%; /* IE10 */
   flex: 50%;
 }
+
+/* forbidden page */
+
+.cage {
+	position: absolute;
+	width: 100%;
+
+	bottom: 0;
+	top: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 	80px, #6f7376 80px, #181617 100px);
+	z-index: 2;
+	animation: close 3s linear;
+}
+.seperate { 
+	  position: fixed;
+    z-index: 1;
+    font-size: 23em;
+    color:  #000;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+		z-index: 1;
+		background-color: #E4E4E1;
+ background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
+ 	background-blend-mode: normal, multiply;
+}
+.really {
+	position: relative;
+}
+.really:after {
+    content: '403';
+    position: absolute;
+    top: 0;
+    bottom: -96px;
+    left: 40px;
+    transform: scaleY(0.6) rotateX(-75deg) skewX(-10deg);
+    transform-origin: 50% 100%;
+    opacity: .2;
+    line-height: 1;
+}
+@keyframes close {
+    0% { left: -75%;}
+    100%{ left: 0%}
+}
+
+.home_button {
+  background-color: #000;
+  border: none;
+  color: white;
+  padding: 20px 34px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 5;
+  margin-left: 850px;
+}
+
+/* product */
+.product_container{
+  display: flex;
+ 
+  border-left: 200px;
+}
+
+.col_product_left{
+ 
+  width: 30%;
+}
+
+.col_product_right{
+ 
+  width: 40%;
+}
+
+
+.card1:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card1 {
+  width: 1900px;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+ 
+  }

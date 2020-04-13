@@ -4,7 +4,11 @@ const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
 const mongoose = require('mongoose');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 
+const Handlebars = require('handlebars');
+const H = require('just-handlebars-helpers');
+H.registerHelpers(Handlebars);
 
 //load the environment variable file 
 require('dotenv').config({path:"./config/keys.env"});
@@ -25,17 +29,28 @@ const customerConstroller = require("./controllers/customer-manage");
 const productConstroller = require("./controllers/product");
 
 // this is to allow specific forms and/or links that were submitteed /pressed to send PUT and DELETE request resepectivly 
-// app.use((req,res,next)=>{
-//     if(req.query.method == "PUT")
-//     {
-//         req.method = "PUT";
-//     }
-//     else if(req.query.method == "DELETE")
-//     {
-//         req.method = "DELETE";
-//     }
-//     next(); // next() make sure call next middleware down below 
-// });
+app.use((req,res,next)=>{
+    if(req.query.method == "PUT")
+    {
+        req.method = "PUT";
+    }
+    else if(req.query.method == "DELETE")
+    {
+        req.method = "DELETE";
+    }
+    next();
+});
+
+app.use(fileUpload());
+
+app.use((req,res,next)=>{
+    if(req.body.type == 'admin'){
+        return true;
+    }else if(req.body.type == 'user'){
+        return false;
+    }
+    next()
+});
 
 app.use(session({secret: `${process.env.SESSION_SECRET}`, 
                 resave: false,

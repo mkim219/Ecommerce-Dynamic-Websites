@@ -3,11 +3,11 @@
     <div class="columnMiddleIndex">
         <section>
             <div class="category"><hr style="width=30%">Category<hr style="width=30%"></div>
-            {{#each category}}
+            {{#each renCat}}
             <div class="row-1">
                 <div class="column-1">
                     <div class="card">
-                        <img src={{this.image}} alt="Category" style="width:105%" >
+                        <img src="/uploads/{{this.pic}}" alt="Category" style="width:105%" >
                         <div class="container">
                             <h4><b>{{this.title}}</b></h4>
                             <p>{{this.price}}</p>
@@ -23,8 +23,8 @@
             <div class="bestitem"><hr> Best Item <hr></div>
             <section>
                 <div class="scrollmenu">
-                    {{#each BestSeller}}
-                    <img class="{{this.isBest}}" src="{{this.image}}" alt="Best_Sellar" style="width:20%; height: 50%">
+                    {{#each renBest}}
+                    <img class="{{this.onlyBestAllowed}}" src="/uploads/{{this.pic}}" alt="Best_Sellar" style="width:20%; height: 50%">
                     {{/each}}
                 </div>
             </section>
@@ -38,21 +38,3 @@
     </div>
 </div>
 
-<script>
-
-    const hideAllProductList = function () {
-        const productLists = document.querySelectorAll(".no");
-        Object.entries(productLists).forEach(entry => {
-            entry[1].style.display = "none";
-        });
-    };
-
-    const showProductList = function () {
-        const productList = document.querySelectorAll(".yes");
-        productList.style.display = "block";
-    };
-
-    hideAllProductList();
-    showProductList()
-
-</script>

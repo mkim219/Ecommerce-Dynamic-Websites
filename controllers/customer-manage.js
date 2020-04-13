@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const register = require("../model/customer-model");
 const bcrypt = require("bcrypt");
-const isAuthenticated = require('../middleware/auth')
+const isAuthenticated = require('../middleware/auth');
+const checkAdmin = require('../middleware/authorization');
 
 router.get("/customer-registration", (req, res) => {
 
@@ -12,6 +13,13 @@ router.get("/customer-registration", (req, res) => {
 
 });
 
+router.get("/forbidden_page", (req, res) => {
+
+    res.render("forbidden_page", {
+
+    });
+
+});
 router.post("/customer-registration", (req, res) => {
 
     const errors = {};
@@ -48,6 +56,7 @@ router.post("/customer-registration", (req, res) => {
     {
         register.findOne({ email: req.body.email })
             .then((isDuplicated) => {
+                //Case when user doesn't input their email
                 if (req.body.email.length === 0) {
                     res.render("customer-registration", {
                         errorName: errors.errorName,
@@ -63,7 +72,8 @@ router.post("/customer-registration", (req, res) => {
                     });
                 
                     
-                }else if(req.body.psw.length === 0){
+                }//case when user doesn't input their password
+                else if(req.body.psw.length === 0){
                     res.render("customer-registration", {
                         errorName: errors.errorName,
                         errorEmail: errors.errorEmail,
@@ -77,7 +87,8 @@ router.post("/customer-registration", (req, res) => {
                         r_email: req.body.email
                     });
 
-                } else if(req.body.pswrepeat.length === 0){
+                }////case when user doesn't input their repeat password
+                else if(req.body.pswrepeat.length === 0){
                     res.render("customer-registration", {
                         errorName: errors.errorName,
                         errorEmail: errors.errorEmail,
@@ -91,6 +102,7 @@ router.post("/customer-registration", (req, res) => {
                         r_email: req.body.email
                     });
                 }
+                //caswe when input email is found in database
                 else if(isDuplicated){
                     errors.errorduplicate = ["Email is already existed"];
                     res.render("customer-registration", {
@@ -108,6 +120,7 @@ router.post("/customer-registration", (req, res) => {
                     });
 
                 } 
+                //pass all validation above, send email and register user
                 else {
               
                     const { fullName, email } = req.body
@@ -147,9 +160,8 @@ router.post("/customer-registration", (req, res) => {
             })
             .catch(err => console.log(`Error happended when login ${err}`))
     }
-
-
 });
+
 //dashboard
 router.get("/welcome", isAuthenticated, (req, res) => {
     res.render("welcome", {
@@ -159,7 +171,7 @@ router.get("/welcome", isAuthenticated, (req, res) => {
 
 });
 
-router.get("/admin", isAuthenticated, (req, res) => {
+router.get("/admin", isAuthenticated,checkAdmin, (req, res) => {
     res.render("admin", {
 
     });

@@ -13,7 +13,7 @@ const productAdd = new Schema({
         type: String,
         required: true
     },
-    pcat:
+    type:
     {
         type: String,
         required: true
@@ -35,10 +35,13 @@ const productAdd = new Schema({
         type: String,
         required: true
         
+    },
+    productPic:
+    {
+        type: String
     }
 
 });
-
 
 const addition = mongoose.model('product', productAdd); //pural
 
