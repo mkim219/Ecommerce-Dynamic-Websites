@@ -6,11 +6,14 @@
 <div class="row1234">
   <div class="col-75">
     <div class="container1234">
-      <form action="/productEdit/{{_id}}?method=PUT" method="POST"> 
+      <form action="/productEdit/{{_id}}?method=PUT" method="POST" enctype="multipart/form-data"> 
         <h3>Product Update</h3>
         <div class="row1234">
           <div class="col-50">
             
+            <label for="_id"></label>
+            <input type="text" id="pname" name="_id" value ="{{_id}}" style="display: none;">
+
             <label for="pname"><i class="fab fa-product-hunt"></i><b>Product Name</b> </label>
             <input type="text" id="pname" name="pname" placeholder="Product Name" value ="{{pname}}">
 
@@ -55,11 +58,11 @@
             <label for="pdet"><i class="fa fa-address-card-o"></i><b>&nbsp Product Detail</b> </label>
             <textarea type="text" id="pdet" name="pdet" style = "margin-left: 10px;width: 450px; height: 150px;">{{pdet}}</textarea>
           </div>
-
+           <label><i class="fas fa-camera-retro"></i> &nbsp <b>File Upload</b></label>
+              <input type="file" name="productPic" id="productPic" ><br><br>
           
         </div>
         <input type="submit" value="Finsih Addition" class="btn">
-
        
 
       </form>
