@@ -43,15 +43,6 @@ app.use((req,res,next)=>{
 
 app.use(fileUpload());
 
-// app.use((req,res,next)=>{
-//     if(req.body.type == 'admin'){
-//         return true;
-//     }else if(req.body.type == 'user'){
-//         return false;
-//     }
-//     next()
-// });
-
 app.use(session({secret: `${process.env.SESSION_SECRET}`, 
                 resave: false,
                 saveUninitialized: true}));
