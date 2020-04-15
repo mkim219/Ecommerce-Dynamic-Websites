@@ -161,7 +161,7 @@ router.get("/wrist", (req, res) => {
 
 });
 
-router.get("/productDash", isAuthenticated, checkAdmin, (req, res) => {
+router.get("/productdash", isAuthenticated, checkAdmin, (req, res) => {
 
     addition.find()
         .then((products) => {
@@ -187,7 +187,7 @@ router.get("/productDash", isAuthenticated, checkAdmin, (req, res) => {
 
 });
 
-router.get("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
+router.get("/productedit/:id", isAuthenticated, checkAdmin, (req, res) => {
 
 
     addition.findById(req.params.id) // return an array when using find() method . use the find when you want to pull mutiple values from database 
@@ -209,7 +209,7 @@ router.get("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
 
 });
 
-router.put("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
+router.put("/productedit/:id", isAuthenticated, checkAdmin, (req, res) => {
 
     const { _id, pname, pprice, type, pquan, isBest, pdet, productPic } = req.body;
 
@@ -244,7 +244,7 @@ router.put("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
         }).catch(err => console.log(`Error happended when inserting data into database ${err}`))
 });
 
-router.delete("/productDash/:id", isAuthenticated, checkAdmin, (req, res) => {
+router.delete("/productdash/:id", isAuthenticated, checkAdmin, (req, res) => {
     addition.deleteOne({ _id: req.params.id })
         .then(() => {
             res.redirect("/productDash");
