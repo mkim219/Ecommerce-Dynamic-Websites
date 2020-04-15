@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const register = require("../model/customer-model");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const isAuthenticated = require('../middleware/auth');
 const checkAdmin = require('../middleware/authorization');
 
