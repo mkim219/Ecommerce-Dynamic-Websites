@@ -32,7 +32,7 @@ router.get("/products", (req, res) => {
         .catch(err => console.log(`Error happended when pulling  from database ${err}`))
 });
 
-router.post("/productAdd", isAuthenticated, checkAdmin, (req, res) => {
+router.post("/productadd", isAuthenticated, checkAdmin, (req, res) => {
     const newProduct = {
         pname: req.body.pname,
         pprice: req.body.pprice,
@@ -60,7 +60,7 @@ router.post("/productAdd", isAuthenticated, checkAdmin, (req, res) => {
 
 });
 
-router.get("/productAdd", isAuthenticated, checkAdmin, (req, res) => {
+router.get("/productadd", isAuthenticated, checkAdmin, (req, res) => {
 
     res.render("productAdd");
 
@@ -236,7 +236,7 @@ router.put("/productedit/:id", isAuthenticated, checkAdmin, (req, res) => {
                                 productPic: req.files.productPic.name
                             })
                                 .then(() => {
-                                    res.redirect("/productDash");
+                                    res.redirect("/productdash");
                                 })
 
                         })
@@ -247,7 +247,7 @@ router.put("/productedit/:id", isAuthenticated, checkAdmin, (req, res) => {
 router.delete("/productdash/:id", isAuthenticated, checkAdmin, (req, res) => {
     addition.deleteOne({ _id: req.params.id })
         .then(() => {
-            res.redirect("/productDash");
+            res.redirect("/productdash");
         })
         .catch(err => console.log(`Error happended when deleting data from database ${err}`))
 
