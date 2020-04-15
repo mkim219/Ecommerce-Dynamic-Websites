@@ -624,7 +624,7 @@ h3{
 
 .col_product_right{
  
-  width: 40%;
+  width: 60%;
 }
 
 .card1:hover {
@@ -632,8 +632,9 @@ h3{
 }
 
 .card1 {
-  width: 1900px;
-
+  width: 2000px;
+  margin-left: 100px;
+  margin-right: 500px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;

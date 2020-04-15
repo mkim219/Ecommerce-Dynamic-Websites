@@ -18,6 +18,7 @@
     "express-fileupload": "^1.1.7-alpha.3",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+    "handlebars-helpers": "^0.10.0",
     "just-handlebars-helpers": "^1.0.17",
     "mongoose": "^5.9.7",
     "nodemailer": "^6.4.2"

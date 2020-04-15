@@ -1,0 +1,33 @@
+<div class="column middle products">
+    <section>
+        {{#each data}}
+        <div class="row-1">
+            <div class="column-1">
+                <div class="card" id={{this.id}}>
+                    <img src="/uploads/{{productPic}}" alt="Best_Sellar" style="width:80%">
+                    <div class="container">
+                        <h4><b>{{this.pname}}</b></h4>
+                        <p>{{this.pprice}}</p>
+                        <p>{{this.type}}</p>
+                        <p>{{this.pquan}}</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <p>cart is empty</p>
+        {{/each}}
+
+        {{#if ( neq totalPrice 0)}}
+       <div><p>{{totalPrice}}</p></div>
+       {{/if}}
+       {{#if ( neq totalQuan 0)}}
+        <div><p>{{totalQuan}}</p></div> 
+        {{/if}}
+       {{#if data}}
+        <a href="/cart/?method=DELETE" class="edit-delete-button">PlaceOrder</a>
+       {{/if}} 
+
+    </section>
+</div>

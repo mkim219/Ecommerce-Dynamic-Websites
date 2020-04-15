@@ -9,7 +9,7 @@ const bestOfbest = require("../model/product");
 router.get('/', (req, res) => {
     Promise.all([
         bestOfbest.find({isBest: "yes"}),
-        bestOfbest.find({pname: {$in: ['nike romaleos 2', 'SBD Belt','SBD Knee Sleeves-Black&Red','SBD Wrist Wraps - Black & Red']}})
+        bestOfbest.find({pname: {$in: ['NIKE ROMALEOS 2', 'SBD Belt','SBD Knee Sleeves - Black & Red','SBD Wrist Wraps - Black & Red']}})
     ]).then(([onlyBest,onlycate]) => {
         const best = onlyBest.map(onlyBest=>{
             return { 

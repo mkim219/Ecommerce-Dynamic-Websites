@@ -4,6 +4,8 @@ const isAuthenticated = require('../middleware/auth')
 const path = require("path");
 const checkAdmin = require('../middleware/authorization');
 const addition = require("../model/product");
+const register = require("../model/customer-model");
+const cart = require("../model/cart")
 
 
 //Route for the Products page 
@@ -160,7 +162,6 @@ router.get("/wrist", (req, res) => {
 
 });
 
-
 router.get("/productDash", isAuthenticated, checkAdmin, (req, res) => {
 
     addition.find()
@@ -272,5 +273,64 @@ router.get("/product_detail/:id", (req, res) => {
         .catch(err => console.log(`Error happended when pulling  from database ${err}`))
 });
 
+router.post("/cart", (req, res) => {
+
+    const newCart = {
+        pname: req.body.pname,
+        pprice: req.body.pprice,
+        pquan: req.body.pquan,
+        productPic: req.body.productPic
+    }
+    const addCart = new cart(newCart);
+    addCart.save()
+    .then(() => {
+        res.redirect('/products')
+    })
+    .catch(err => console.log(`Error happended when inserting data into database ${err}`))
+});
+
+router.get("/cart", (req, res) => {
+    
+    cart.find()
+    .then((items) => {
+    
+        var sumPrice  = 0;
+        for(var i = 0; i < items.length; i++){
+            sumPrice += items[i].pprice;
+        }
+
+        var sumQuan  = 0;
+        for(var i = 0; i < items.length; i++){
+            sumQuan += items[i].pquan;
+        }
+   
+        const cart_list = items.map(items => {
+            return {
+                pname: items.pname,
+                pprice: items.pprice,
+                pquan: items.pquan,
+                productPic: items.productPic,
+                sumPrice,
+                sumQuan
+                
+            }
+        });
+        res.render("cart", {
+            data: cart_list,
+            totalPrice: sumPrice,
+            totalQuan: sumQuan
+        });
+    })
+    .catch(err => console.log(`Error happended when pulling  from database ${err}`))
+});
+
+router.delete("/cart", (req, res) => {
+    cart.deleteMany()
+        .then(() => {
+            res.redirect("/cart");
+        })
+        .catch(err => console.log(`Error happended when deleting data from database ${err}`))
+
+});
 
 module.exports = router;

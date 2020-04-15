@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const productAdd = new Schema({
+const cartAdd = new Schema({
     pname:
     {
         type: String, 
@@ -13,26 +13,10 @@ const productAdd = new Schema({
         type: Number,
         required: true
     },
-    type:
-    {
-        type: String,
-        required: true
-    },
+    
     pquan:
     {
         type: Number,
-        required: true
-        
-    },
-    isBest:
-    {
-        type: String,
-        required: true
-        
-    },
-    pdet:
-    {
-        type: String,
         required: true
         
     },
@@ -43,6 +27,6 @@ const productAdd = new Schema({
 
 });
 
-const addition = mongoose.model('product', productAdd); //pural
+const cart = mongoose.model('cart', cartAdd); //pural
 
-module.exports = addition;
+module.exports = cart;
