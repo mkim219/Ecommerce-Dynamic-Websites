@@ -32,7 +32,7 @@ router.get("/products", (req, res) => {
         .catch(err => console.log(`Error happended when pulling  from database ${err}`))
 });
 
-router.post("/productAdd", isAuthenticated, checkAdmin, (req, res) => {
+router.post("/productAdd", isAuthenticated, (req, res) => {
     const newProduct = {
         pname: req.body.pname,
         pprice: req.body.pprice,
@@ -60,7 +60,7 @@ router.post("/productAdd", isAuthenticated, checkAdmin, (req, res) => {
 
 });
 
-router.get("/productAdd", isAuthenticated, checkAdmin, (req, res) => {
+router.get("/productAdd", isAuthenticated, (req, res) => {
 
     res.render("productAdd", {
     });
@@ -162,7 +162,7 @@ router.get("/wrist", (req, res) => {
 
 });
 
-router.get("/productDash", isAuthenticated, checkAdmin, (req, res) => {
+router.get("/productDash", isAuthenticated, (req, res) => {
 
     addition.find()
         .then((products) => {
@@ -188,7 +188,7 @@ router.get("/productDash", isAuthenticated, checkAdmin, (req, res) => {
 
 });
 
-router.get("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
+router.get("/productEdit/:id", isAuthenticated, (req, res) => {
 
 
     addition.findById(req.params.id) // return an array when using find() method . use the find when you want to pull mutiple values from database 
@@ -210,7 +210,7 @@ router.get("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
 
 });
 
-router.put("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
+router.put("/productEdit/:id", isAuthenticated, (req, res) => {
 
     const { _id, pname, pprice, type, pquan, isBest, pdet, productPic } = req.body;
 
@@ -245,7 +245,7 @@ router.put("/productEdit/:id", isAuthenticated, checkAdmin, (req, res) => {
         }).catch(err => console.log(`Error happended when inserting data into database ${err}`))
 });
 
-router.delete("/productDash/:id", isAuthenticated, checkAdmin, (req, res) => {
+router.delete("/productDash/:id", isAuthenticated, (req, res) => {
     addition.deleteOne({ _id: req.params.id })
         .then(() => {
             res.redirect("/productDash");
