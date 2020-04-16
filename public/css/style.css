@@ -281,7 +281,7 @@ opacity: 1;
 }
 
 a {
-color: dodgerblue;
+/* color: dodgerblue; */
 }
 
 .signin {
@@ -506,7 +506,7 @@ label {
 }
 
 a {
-  color: #2196F3; 
+  /* color: #2196F3;  */
 }
 
 hr {
@@ -639,5 +639,165 @@ h3{
   padding: 16px;
   text-align: center;
   background-color: #f1f1f1;
- 
   }
+
+  /* Cart */
+  .parents{
+    display: flex;
+    margin-left: 500px;
+    
+  }
+
+  .img-child1{
+    flex-direction: column;
+    width: 800px;
+  }
+
+  .img-child2{
+    flex-direction: row;
+    
+  }
+
+  .child2{
+    margin-left: 50px;
+    flex-direction: column;
+    width: 500px;
+    height: 500px !important;
+    font-family: 'Sriracha', cursive;
+  }
+
+  .product-box{
+    display: flex;
+    width: 500px;
+    height: 250px;
+    font-family: 'Sriracha', cursive;
+  }
+
+  .img-box{
+    font-family: 'Sriracha', cursive;
+    width: 60%;
+    margin-top: 20px;
+  }
+  .des-box{
+    flex-direction: column;
+    font-family: 'Sriracha', cursive;
+    width: 400px;
+  }
+
+  .price-tag{
+    color: red;
+  }
+
+  .stock{
+    color: green;
+  }
+
+  .total{
+    color: red;
+    font-family: 'Sriracha', cursive;
+  }
+
+  a.cart_button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button ;
+
+    text-decoration: none;
+    color: black;
+}
+
+
+.cart_button {
+  display: block;
+  width: 300px;
+  height: 50px;
+  background: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white !important;
+  font-weight: bold;
+  
+}
+
+.href_buttom{
+  width: 120px;
+  height: 30px;
+}
+
+.href_buttom_detail_box{
+  margin-left: 100px;
+  display: block;
+  width: 100px;
+  height: 50px;
+  background: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white !important;
+  font-weight: bold;
+}
+
+.href_button_detail{
+  width: 120px;
+  height: 30px;
+  text-decoration: none;
+  color: white !important;
+  font-family: 'Sriracha', cursive ;
+  font-size: 20px;
+}
+
+.href_buttom_dash_box-1{
+  flex-direction: column;
+
+  display: block;
+  width: 100px;
+  height: 50px;
+  background: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white !important;
+  font-weight: bold;
+}
+
+.href_buttom_dash_box-2{
+  flex-direction: column;
+  margin-left: 10px;
+  display: block;
+  width: 100px;
+  height: 50px;
+  background: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white !important;
+  font-weight: bold;
+}
+
+.href_button_dash_edit{
+  flex-direction: column;
+  width: 200px;
+  height: 30px;
+  text-decoration: none;
+  color: white !important;
+  font-family: 'Sriracha', cursive ;
+  font-size: 20px;
+}
+
+.href_button_dash_del{
+  flex-direction: column;
+  width: 120px;
+  height: 30px;
+  text-decoration: none;
+  color: white !important;
+  font-family: 'Sriracha', cursive ;
+  font-size: 20px;
+ 
+}
+
+.flex_box{
+  margin-left: 40px;
+  display:flex;
+}
+

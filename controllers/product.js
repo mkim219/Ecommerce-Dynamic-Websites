@@ -52,7 +52,7 @@ router.post("/productadd", isAuthenticated, checkAdmin, (req, res) => {
                         productPic: req.files.productPic.name
                     })
                         .then(() => {
-                            res.redirect(`/productAdd`)
+                            res.redirect(`/productadd`)
                         })
 
                 })
@@ -62,7 +62,7 @@ router.post("/productadd", isAuthenticated, checkAdmin, (req, res) => {
 
 router.get("/productadd", isAuthenticated, checkAdmin, (req, res) => {
 
-    res.render("productAdd");
+    res.render("productadd");
 
 });
 
@@ -179,7 +179,7 @@ router.get("/productdash", isAuthenticated, checkAdmin, (req, res) => {
                 }
             });
 
-            res.render("productDash", {
+            res.render("productdash", {
                 data: product_List,
             });
         })
@@ -193,7 +193,7 @@ router.get("/productedit/:id", isAuthenticated, checkAdmin, (req, res) => {
     addition.findById(req.params.id) // return an array when using find() method . use the find when you want to pull mutiple values from database 
         .then((editProduct) => {
             const { _id, pname, pprice, type, pquan, isBest, pdet, productPic } = editProduct; // destructing object
-            res.render("productEdit", {
+            res.render("productedit", {
                 _id,
                 pname,
                 pprice,
