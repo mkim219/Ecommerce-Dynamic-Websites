@@ -20,6 +20,7 @@ router.get("/forbidden_page", (req, res) => {
     });
 
 });
+
 router.post("/customer-registration", (req, res) => {
 
     const errors = {};
@@ -179,7 +180,6 @@ router.get("/admin", isAuthenticated,checkAdmin, (req, res) => {
 
 });
 
-
 router.get("/login", (req, res) => {
 
     res.render("login", {
@@ -215,7 +215,6 @@ router.post("/login", (req, res) => {
         .then((user) => {
             //there was no match email
             
-
             if (req.body.email.length === 0) {
                 
                 res.render("login", {
@@ -227,6 +226,15 @@ router.post("/login", (req, res) => {
                     l_email: req.body.email
                 })
 
+            } else if(req.body.psw.length === 0){
+                res.render("login", {
+                    isMatch_email: errorsAuth.errorsemail,
+
+                    
+                    errorPassword: errorsLog.errorPassword,
+
+                    l_email: req.body.email
+                })
             }
             
             else if(user == null){
@@ -276,3 +284,4 @@ router.post("/login", (req, res) => {
 });
 
 module.exports = router;
+

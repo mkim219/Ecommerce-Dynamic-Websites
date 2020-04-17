@@ -9,6 +9,30 @@ const cart = require("../model/cart")
 
 
 //Route for the Products page 
+
+router.get("/productall",isAuthenticated, checkAdmin, (req, res) => {
+
+    addition.find()
+        .then((products) => {
+            const product_List = products.map(products => {
+                return {
+                    id: products._id,
+                    pname: products.pname,
+                    pprice: products.pprice,
+                    type: products.type,
+                    pquan: products.pquan,
+                    isBest: products.isBest,
+                    pdet: products.pdet,
+                    pic: products.productPic
+                }
+            });
+            res.render("products", {
+                data: product_List,
+            });
+        })
+        .catch(err => console.log(`Error happended when pulling  from database ${err}`))
+});
+
 router.get("/products", (req, res) => {
 
     addition.find()
@@ -30,6 +54,110 @@ router.get("/products", (req, res) => {
             });
         })
         .catch(err => console.log(`Error happended when pulling  from database ${err}`))
+});
+
+router.post("/products", (req, res) => {
+    if(req.body.type == "Belt"){
+    addition.find({type: req.body.type})
+    .then((search) => {
+        const search_list = search.map(search => {
+            return {
+                id: search._id,
+                pname: search.pname,
+                pprice: search.pprice,
+                type: search.type,
+                pquan: search.pquan,
+                isBest: search.isBest,
+                pdet: search.pdet,
+                pic: search.productPic
+            }
+        });
+        res.render("products", {
+            data: search_list
+        });
+    })
+    .catch(err => console.log(`Error happended when pulling from database ${err}`))}
+    else if(req.body.type == "Sleeves"){
+        addition.find({type: req.body.type})
+        .then((search) => {
+            const search_list = search.map(search => {
+                return {
+                    id: search._id,
+                    pname: search.pname,
+                    pprice: search.pprice,
+                    type: search.type,
+                    pquan: search.pquan,
+                    isBest: search.isBest,
+                    pdet: search.pdet,
+                    pic: search.productPic
+                }
+            });
+            res.render("products", {
+                data: search_list
+            });
+        })
+        .catch(err => console.log(`Error happended when pulling from database ${err}`))
+    }else if(req.body.type == "Lifting Shoes"){
+        addition.find({type: req.body.type})
+        .then((search) => {
+            const search_list = search.map(search => {
+                return {
+                    id: search._id,
+                    pname: search.pname,
+                    pprice: search.pprice,
+                    type: search.type,
+                    pquan: search.pquan,
+                    isBest: search.isBest,
+                    pdet: search.pdet,
+                    pic: search.productPic
+                }
+            });
+            res.render("products", {
+                data: search_list
+            });
+        })
+        .catch(err => console.log(`Error happended when pulling from database ${err}`))
+    }else if(req.body.type == "Wrist Wrap"){
+        addition.find({type: req.body.type})
+        .then((search) => {
+            const search_list = search.map(search => {
+                return {
+                    id: search._id,
+                    pname: search.pname,
+                    pprice: search.pprice,
+                    type: search.type,
+                    pquan: search.pquan,
+                    isBest: search.isBest,
+                    pdet: search.pdet,
+                    pic: search.productPic
+                }
+            });
+            res.render("products", {
+                data: search_list
+            });
+        })
+        .catch(err => console.log(`Error happended when pulling from database ${err}`))
+    }else{
+        addition.find()
+        .then((search) => {
+            const search_list = search.map(search => {
+                return {
+                    id: search._id,
+                    pname: search.pname,
+                    pprice: search.pprice,
+                    type: search.type,
+                    pquan: search.pquan,
+                    isBest: search.isBest,
+                    pdet: search.pdet,
+                    pic: search.productPic
+                }
+            });
+            res.render("products", {
+                data: search_list
+            });
+        })
+        .catch(err => console.log(`Error happended when pulling from database ${err}`))
+    }
 });
 
 router.post("/productadd", isAuthenticated, checkAdmin, (req, res) => {
@@ -272,7 +400,7 @@ router.get("/product_detail/:id", (req, res) => {
         .catch(err => console.log(`Error happended when pulling  from database ${err}`))
 });
 
-router.post("/cart", (req, res) => {
+router.post("/cart",isAuthenticated, (req, res) => {
 
     const newCart = {
         pname: req.body.pname,
@@ -288,7 +416,7 @@ router.post("/cart", (req, res) => {
     .catch(err => console.log(`Error happended when inserting data into database ${err}`))
 });
 
-router.get("/cart", (req, res) => {
+router.get("/cart",isAuthenticated, (req, res) => {
     
     cart.find()
     .then((items) => {
@@ -324,12 +452,60 @@ router.get("/cart", (req, res) => {
 });
 
 router.delete("/cart", (req, res) => {
-    cart.deleteMany()
-        .then(() => {
-            res.redirect("/cart");
+    cart.find()
+    .then((pro)=>{
+        const product_List = pro.map(pro => {
+            return {
+                pname: pro.pname,
+                pprice: pro.pprice,
+                pquan: pro.pquan,
+            }
         })
-        .catch(err => console.log(`Error happended when deleting data from database ${err}`))
+        
+        var sumPrice  = 0;
+        for(var i = 0; i < product_List.length; i++){
+            sumPrice += product_List[i].pprice;
+        }
 
+        var sumQuan  = 0;
+        for(var i = 0; i < product_List.length; i++){
+            sumQuan += product_List[i].pquan;
+        }
+        
+        const { fullName, email } = req.session.user
+                    const sgMail = require('@sendgrid/mail');
+                    sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+                    const msg = {
+                        to: `${email}`, 
+                        from: 'rocking1782@gmail.com',
+                        subject: `${fullName}, Order Confirmation`,
+                        html:
+                            `
+                            Welcome To MS Powerlifting Store!! 
+                            <br>
+                            Product: ${product_List.map((x, i)=>{return x.pname})}  <br>
+                            Price:CND$ ${sumPrice}  <br>
+                            Quantity: ${sumQuan}  <br>
+                            
+                            `
+                    };
+                    sgMail.send(msg)
+                        .then()
+                        .catch(err => {
+                            console.log(`Error ${err}`);
+                        });
+       
+    
+    }).catch(err => console.log(`Error Email${err}`))
+
+    cart.deleteMany()
+    .then(() => {
+        res.redirect('/cart');
+    })
+    .catch(err => console.log(`Error happended when deleting data from database ${err}`))
+   
 });
+
+
 
 module.exports = router;
