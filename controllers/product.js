@@ -420,12 +420,13 @@ router.get("/cart",isAuthenticated, (req, res) => {
     
     cart.find()
     .then((items) => {
-    
-        var sumPrice  = 0;
-        for(var i = 0; i < items.length; i++){
-            sumPrice += items[i].pprice;
-        }
 
+
+        var totalP  = 0;
+        for(var i = 0; i < items.length; i++){
+            totalP += (items[i].pprice * items[i].pquan);
+        }
+      
         var sumQuan  = 0;
         for(var i = 0; i < items.length; i++){
             sumQuan += items[i].pquan;
@@ -437,14 +438,14 @@ router.get("/cart",isAuthenticated, (req, res) => {
                 pprice: items.pprice,
                 pquan: items.pquan,
                 productPic: items.productPic,
-                sumPrice,
+                totalP,
                 sumQuan
-                
             }
         });
         res.render("cart", {
             data: cart_list,
-            totalPrice: sumPrice,
+          
+            totalPrice: totalP,
             totalQuan: sumQuan
         });
     })
@@ -462,10 +463,12 @@ router.delete("/cart", (req, res) => {
             }
         })
         
+
         var sumPrice  = 0;
         for(var i = 0; i < product_List.length; i++){
-            sumPrice += product_List[i].pprice;
+            sumPrice += (product_List[i].pprice * product_List[i].pquan);
         }
+
 
         var sumQuan  = 0;
         for(var i = 0; i < product_List.length; i++){
