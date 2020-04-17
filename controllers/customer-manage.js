@@ -270,7 +270,8 @@ router.post("/login", (req, res) => {
                         else {
                             errorsAuth.errospsw = ["Wrong password"];
                             res.render("login", {
-                                isMatch_psw: errorsAuth.errospsw
+                                isMatch_psw: errorsAuth.errospsw,
+                                l_email: req.body.email
                             })
                         }
 
